@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import List
 
 import aiofiles
-from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, UploadFile, status, Response
 
 from ..config import settings
 from ..ingestion import chunk_pages, extract_pdf_pages
