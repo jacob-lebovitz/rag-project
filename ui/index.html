@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDF RAG Chat</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">&#x1F4D6;</span>
+      <h1>PDF RAG Chat</h1>
+    </div>
+    <div class="status" id="status">
+      <span class="dot"></span>
+      <span id="status-text">connecting&hellip;</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="upload-card">
+        <h2>Knowledge base</h2>
+        <p class="hint">Drop PDFs below to ingest them into the index.</p>
+        <label for="file-input" class="dropzone" id="dropzone">
+          <strong>Click or drop PDFs</strong>
+          <small>Multiple files supported</small>
+          <input id="file-input" type="file" accept="application/pdf" multiple hidden />
+        </label>
+        <button id="upload-btn" disabled>Ingest selected</button>
+        <div id="upload-log" class="log"></div>
+      </section>
+
+      <section class="info-card">
+        <h3>Indexed</h3>
+        <div class="metric">
+          <span class="metric-label">Chunks</span>
+          <span class="metric-value" id="chunk-count">&mdash;</span>
+        </div>
+        <button id="reset-btn" class="danger">Reset index</button>
+      </section>
+    </aside>
+
+    <section class="chat">
+      <div id="chat-log" class="chat-log">
+        <div class="msg assistant">
+          <div class="bubble">
+            <p>Hi! Upload some PDFs, then ask me a question about them.</p>
+          </div>
+        </div>
+      </div>
+      <form id="chat-form" class="chat-input">
+        <textarea
+          id="question"
+          placeholder="Ask a question about your documents..."
+          rows="1"
+          required
+        ></textarea>
+        <button type="submit" id="send-btn">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
