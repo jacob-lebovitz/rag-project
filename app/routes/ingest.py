@@ -94,7 +94,11 @@ async def ingest_files(files: List[UploadFile] = File(...)) -> IngestResponse:
     return IngestResponse(files=ingested, total_chunks=total_chunks)
 
 
-@router.delete("", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "",
+    status_code=status.HTTP_204_NO_CONTENT,
+    response_class=Response,   # 👈 THIS is the missing piece
+)
 async def reset_index() -> Response:
     """Wipe the entire index and all uploaded files. Useful for testing."""
     get_retriever().reset()
