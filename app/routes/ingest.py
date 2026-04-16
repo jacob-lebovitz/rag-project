@@ -95,10 +95,12 @@ async def ingest_files(files: List[UploadFile] = File(...)) -> IngestResponse:
 
 
 @router.delete("", status_code=status.HTTP_204_NO_CONTENT)
-async def reset_index() -> None:
+async def reset_index() -> Response:
     """Wipe the entire index and all uploaded files. Useful for testing."""
     get_retriever().reset()
     if settings.uploads_dir.exists():
         shutil.rmtree(settings.uploads_dir)
         settings.uploads_dir.mkdir(parents=True, exist_ok=True)
     logger.info("Index reset")
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
